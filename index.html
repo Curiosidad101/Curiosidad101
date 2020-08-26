@@ -1,22 +1,75 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>CSS inheritance</title>
-    <style>
-    p{font-family: serif;}
-    </style>
-  </head>
-  <body>
-    <p>La naturaleza no es totalmente simétrica como nos gustaría pensar (Como a un matemático platónico le gustaría pensar), las generalizaciones matemáticas aveces son idealizaciones que no se corresponden del todo con la complejidad del mundo. Pero podemos encontrar ejemplos concretos en el mundo real de los cuales muchas ideas matemáticas fueron extraídas. [intención de guía no de presentación]</p>
+var xPositions = [random(400), random(300), random(400), random(400), random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400)];
+var yPositions = [random(400), random(400), random(400), random(400),random(400),random(400), random(300), random(400), random(400), random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400),random(400)];
+
+//position of OhNoes Guy!
+    var x = 0;
+//How far OhNoes Guy moves every time
+    var speed = 1;
     
-    <p>Desde pequeños nos enseñan los nombres de los <span style="color: red;">colores</span>, pero lo que más nos sorprende es el hecho que cuando combinas dos <span style="color: #2b00fe;">colores</span> obtienes otro <span style="color: #800180;">color</span>.&nbsp;</p>
+//Rain
+
+draw = function() {
+    background(7, 85, 94);
     
-    <p>La idea de poder <span style="background-color: white;"><span style="color: #6aa84f;">manipular</span></span> y<span style="background-color: white;"> <span style="color: #6aa84f;">combinar</span> cosas&nbsp;e</span>n el mundo real, para obtener nuevas <span style="background-color: white;">cosas </span>de la <i>misma naturaleza</i>, es capturada en matemáticas en el concepto de <span style="color: #6aa84f;">operaciones</span>.&nbsp;</p>
+    //hill
+    fill(71, 135, 95);
+    ellipse(113, 376, 500, 188);
     
-    <p>Un músico puede combinar la nota de <span style="color: red;">Do </span>con la nota de <span style="color: #2b00fe;">Sol</span> y <span style="color: #ffa400;">Mi</span> para crear el acorde de&nbsp;<span style="color: #800180;">Do</span>. [Esto parece más como un isomorfismo] <a href="https://www.patmissin.com/ffaq/q26.html#:~:text=Whenever%20you%20play%20two%20pitches,one%20is%20the%20summational%20tone.">Investigar</a></p><p><br /></p>
+    //grass
+    for(var j = 0; j < 5; j++) {
+        image(getImage("cute/GrassBlock"),j*100 , 290);
+    }
+
+    noStroke();
+    fill(0, 192, 240);
     
-    <p>La idea de poder <span style="color: #6aa84f;">combinar</span> como mínimo dos cosas, es extraída de nuestra experiencias y generalizada en matemáticas.</p>
+    for (var i = 0; i < xPositions.length; i++) {
+         
+         //mouse rain interaction
+        if (yPositions[i] > mouseY && xPositions[i] < mouseX + 50 &&              xPositions[i] > mouseX - 40) {
+                yPositions[i]=0;
+            } 
+         
+        // rain  
+         if (yPositions[i] > 400 ) {
+            yPositions[i] = 0;
+        }
     
-  </body>
-</html>
+        ellipse(xPositions[i], yPositions[i], 10, 10);
+        yPositions[i] = yPositions[i] + 5 ;
+        
+    }
+    
+    //OhNoes Guy movement
+    
+            //Interaction
+                if (mouseX < x + 60 && mouseX > x + 5) {
+                    image(getImage("creatures/OhNoes-Happy"), x, 300, 90, 80);
+                
+            } else {
+                
+                image(getImage("creatures/OhNoes"), x, 300, 90, 80);
+                
+            }
+                
+                
+        if (x > 310) {
+            speed += -1;
+        }
+        
+        if (x < 1) {
+            speed += 1;
+        }
+    
+    //OhNoes Guy
+       //image(OhNoesFace[1], x, 300, 90, 80);
+    
+    //Move OhNoes Guy
+        x = x + speed;
+    
+    //Leaf Umbrella 
+        image(getImage("avatars/leaf-green"), mouseX - 50, mouseY - 50);
+        
+    
+
+};
